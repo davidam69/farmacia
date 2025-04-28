@@ -1,0 +1,30 @@
+﻿@model List<FarmaciaApp.Models.Medicamento>
+
+<h2>Listado de Medicamentos</h2>
+
+<a asp-action="Crear" class="btn btn-primary">Agregar Medicamento</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var med in Model)
+        {
+            <tr>
+                <td>@med.nombre</td>
+                <td>$@med.precio</td>
+                <td>@med.stock</td>
+                <td>
+                    <a asp-action="Detalles" asp-route-id="@med.id" class="btn btn-info">Ver</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

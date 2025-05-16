@@ -1,0 +1,17 @@
+﻿global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Mvc;
+global using FarmaciaApp.Models;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Data.SqlClient;
+global using Microsoft.EntityFrameworkCore;
+global using BCrypt.Net;
+global using System.Diagnostics;
+global using System.Globalization;
+global using CsvHelper;
+global using CsvHelper.Configuration;
+global using System.Text;
+global using FarmaciaApp.Servicios;
+global using System.IO;
+global using FarmaciaApp.Helpers;
+global using FarmaciaApp.Models.ViewModels;

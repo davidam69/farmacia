@@ -1,9 +1,9 @@
-namespace farmacia.Models
+namespace FarmaciaApp.Models
 {
     public class ErrorViewModel
     {
         public string? RequestId { get; set; }
-
+        
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }

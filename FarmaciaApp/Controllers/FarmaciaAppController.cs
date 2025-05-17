@@ -59,6 +59,55 @@
             {
                return View();
             }
-        
+            
+
+
+            public IActionResult AgregarAlCarrito(int id)
+            {
+                // Buscar producto en CSV
+                var productos = CsvHelpers.LeerProductos(rutaProductos);
+                var producto = productos.FirstOrDefault(p => p.id == id);
+                if (producto == null) return NotFound();
+
+                // Obtener el carrito actual de la sesión
+                var carritoJson = HttpContext.Session.GetString("Carrito");
+                var carrito = string.IsNullOrEmpty(carritoJson)
+                ? new List<CarritoItem>()
+            :   JsonConvert.DeserializeObject<List<CarritoItem>>(carritoJson);
+
+                // Verificar si ya está en el carrito
+                var itemExistente = carrito.FirstOrDefault(c => c.productoId == id);
+                if (itemExistente != null)
+                {   
+                    itemExistente.cantidad++;
+                }
+                else
+                {
+                    carrito.Add(new CarritoItem
+                    {
+                        productoId = producto.id,
+                        nombre = producto.nombre,
+                        precio = producto.precio,
+                        cantidad = 1
+                    });
+                }
+
+                // Guardar de nuevo el carrito en la sesión
+                HttpContext.Session.SetString("Carrito", JsonConvert.SerializeObject(carrito));
+
+                return RedirectToAction("Index");
+            }
+
+            public IActionResult VerCarrito()
+            {
+                var carritoJson = HttpContext.Session.GetString("Carrito");
+                var carrito = string.IsNullOrEmpty(carritoJson)
+                    ? new List<CarritoItem>()
+                    : JsonConvert.DeserializeObject<List<CarritoItem>>(carritoJson);
+
+                return View(carrito);
+            }
+
+
     }
 }

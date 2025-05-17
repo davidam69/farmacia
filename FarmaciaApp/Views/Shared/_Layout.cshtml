@@ -47,6 +47,10 @@
     </header>
 
     <div class="container">
+        <a asp-controller="Carrito" asp-action="Index" class="btn btn-outline-success mt-3 float-end">
+            <i class="bi bi-cart4"></i> Ver Carrito (@(Context.Session.GetInt32("CarritoCantidad") ?? 0))
+        </a>
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

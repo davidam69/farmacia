@@ -33,16 +33,22 @@
                     <div class="card-body">
                         <h5 class="card-title">@producto.nombre</h5>
                         <p class="text-success fw-bold">$@producto.precio</p>
-                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+
+                        <!-- Formulario para agregar al carrito -->
+                        <form asp-action="Agregar" asp-controller="Carrito" method="post">
+                            <input type="hidden" name="id" value="@producto.id" />
+                            <input type="hidden" name="nombre" value="@producto.nombre" />
+                            <input type="hidden" name="precio" value="@producto.precio" />
+                            <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
         }
     </div>
 
-    </div>
 
-    <!-- Información de sucursales -->
     <div class="mt-5">
         <h3>Sucursales</h3>
         <p>Visitanos en nuestras sucursales físicas:</p>
@@ -58,14 +64,17 @@
     <div class="mt-5">
         <h3>Contacto</h3>
         <form asp-controller="FarmaciaApp" asp-action="Contacto" method="post">
+
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" name="nombre" class="form-control" required />
             </div>
+
             <div class="mb-3">
                 <label for="email" class="form-label">Correo electrónico</label>
                 <input type="email" name="email" class="form-control" required />
             </div>
+
             <div class="mb-3">
                 <label for="mensaje" class="form-label">Mensaje</label>
                 <textarea name="mensaje" class="form-control" rows="4" required></textarea>

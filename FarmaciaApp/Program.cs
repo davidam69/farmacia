@@ -6,8 +6,8 @@ builder.Services.AddSession();
 // MVC
 builder.Services.AddControllersWithViews();
 
-Console.WriteLine("Cadena de conexión:");
-Console.WriteLine(builder.Configuration.GetConnectionString("DataBaseConnection"));
+// Console.WriteLine("Cadena de conexión:");
+// Console.WriteLine(builder.Configuration.GetConnectionString("DataBaseConnection"));
 
 var app = builder.Build();
 

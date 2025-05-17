@@ -15,3 +15,4 @@ global using FarmaciaApp.Servicios;
 global using System.IO;
 global using FarmaciaApp.Helpers;
 global using FarmaciaApp.Models.ViewModels;
+global using Newtonsoft.Json;

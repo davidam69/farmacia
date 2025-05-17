@@ -1,0 +1,54 @@
+﻿@model List<FarmaciaApp.Models.CarritoItem>
+
+<h2>Carrito de Compras</h2>
+
+@if (!Model.Any())
+{
+    <p>Tu carrito está vacío.</p>
+}
+else
+{
+    <form asp-action="ActualizarCantidad" asp-controller="Carrito" method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].nombre</td>
+                        <td>$@Model[i].precio</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="hidden" name="items[@i].ProductoId" value="@Model[i].productoId" />
+                                <input type="number" name="items[@i].Cantidad" value="@Model[i].cantidad" min="1" class="form-control" style="width: 80px;" />
+                            </div>
+                        </td>
+                        <td>$@(Model[i].precio * Model[i].cantidad)</td>
+                        <td>
+                            <form asp-action="Eliminar" asp-controller="Carrito" method="post">
+                                <input type="hidden" name="id" value="@Model[i].productoId" />
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-secondary">Actualizar cantidades</button>
+    </form>
+
+    <h4>Total: $@Model.Sum(i => i.precio * i.cantidad)</h4>
+
+    <form asp-action="Pagar" asp-controller="Carrito" method="post">
+        <button type="submit" class="btn btn-success mt-3">Pagar</button>
+    </form>
+}

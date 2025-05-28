@@ -1,17 +1,61 @@
 ﻿@model FarmaciaApp.Models.Usuarios
-
 @{
     ViewData["Title"] = "Registro";
 }
 
-<h2>Registrarse</h2>
-<form method="post">
-    <input name="nombre" placeholder="Nombre" required /><br />
-    <input name="email" type="email" placeholder="Email" required /><br />
-    <input name="passwordHash" type="password" placeholder="Contraseña" required /><br />
-    <button type="submit">Registrarse</button>
-</form>
-@if (ViewBag.Mensaje != null)
-{
-    <p style="color:red;">@ViewBag.Mensaje</p>
+<div class="container my-5" style="max-width: 500px;">
+    <h2 class="text-center mb-4">Crear cuenta</h2>
+
+    <form method="post" class="needs-validation" novalidate onsubmit="return validarFormulario();">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre completo</label>
+            <input name="nombre" id="nombre" class="form-control" placeholder="Ej: Juan Pérez" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input name="email" id="email" type="email" class="form-control" placeholder="Ej: juan@example.com" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="passwordHash" class="form-label">Contraseña</label>
+            <input name="passwordHash" id="passwordHash" type="password" class="form-control" placeholder="Mínimo 6 caracteres" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+            <input id="confirmPassword" type="password" class="form-control" placeholder="Repite la contraseña" required />
+        </div>
+
+        <div id="errorPassword" class="text-danger mb-3" style="display:none;">
+            Las contraseñas no coinciden.
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+
+        @if (ViewBag.Mensaje != null)
+        {
+            <div class="alert alert-danger mt-3" role="alert">
+                @ViewBag.Mensaje
+            </div>
+        }
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        function validarFormulario() {
+            var password = document.getElementById("passwordHash").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var errorDiv = document.getElementById("errorPassword");
+
+            if (password !== confirmPassword) {
+                errorDiv.style.display = "block";
+                return false;
+            }
+
+            errorDiv.style.display = "none";
+            return true;
+        }
+    </script>
 }

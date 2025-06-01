@@ -24,7 +24,7 @@
 
         <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
-            <input id="confirmPassword" type="password" class="form-control" placeholder="Repite la contraseña" required />
+            <input name="confirmPassword" id="confirmPassword" type="password" class="form-control" placeholder="Confirmar contraseña" required />
         </div>
 
         <div id="errorPassword" class="text-danger mb-3" style="display:none;">
@@ -57,5 +57,16 @@
             errorDiv.style.display = "none";
             return true;
         }
+
+         function ocultarError() {
+            var errorDiv = document.getElementById("errorPassword");
+            errorDiv.style.display = "none";
+        }
+
+        // Asociar eventos para ocultar el error mientras se escribe
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("passwordHash").addEventListener("input", ocultarError);
+            document.getElementById("confirmPassword").addEventListener("input", ocultarError);
+        });
     </script>
 }

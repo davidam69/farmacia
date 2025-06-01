@@ -53,7 +53,8 @@
                     {
                         id = int.Parse(campos[0]),
                         nombre = campos[1],
-                        direccion = campos[2]
+                        direccion = campos[2],
+                        telefono = campos[3],
                     });
                 }
             }
